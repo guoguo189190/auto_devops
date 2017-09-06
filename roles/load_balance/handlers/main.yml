@@ -1,0 +1,6 @@
+---
+tasks:
+  - name: restart haproxy
+    service: 
+       name: haproxy
+       state: restart
