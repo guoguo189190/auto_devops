@@ -1,0 +1,22 @@
+---
+tasks:
+  - name: shutdown iptables
+    servcie: 
+      name: iptables
+      state: stopped
+      enabled: no
+
+  - name: shutdown selinux
+    lineinfile:
+      path: /etc/selinux/config
+      regexp: '^SELINUX='
+      line: 'SELINUX=disabled'
+
+  - name: cp repo file 
+    file:
+      src: '{{ items }}'
+      dest: '/etc/yum.repo.d/{{ items }}'
+      with_items:
+              - CentOs.repo
+              - epel.repo
+              - self_contribute.repo
